@@ -1,24 +1,29 @@
-name: generate-ascii
-on: push
+name: my second workflow | training 
+
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  Ascijob:
+  first_job:
     runs-on: ubuntu-latest
+    
     steps:
-
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@v6.0.2
 
-      - name: Install cowsay
-        run: sudo apt-get update && sudo apt-get install -y cowsay
+      - name: List files
+        run: ls -ltra
 
-      - name: Run Script
-        run: |
-          chmod +x ./script.sh
-          ./script.sh
+      - name: Run shell script
+        run: 
+            |
+          chmod +x script2.sh
+          ./script2.sh
 
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v6.0.0
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4
         with:
-          name: dragon-text
+          name: final
           path: dragon.txt
