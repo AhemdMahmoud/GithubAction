@@ -1,0 +1,11 @@
+name : myfirstworkflow 
+on:
+    push:
+      branches: 
+        - main
+jobs:
+    first_job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: list files
+              run : ls-ltra
