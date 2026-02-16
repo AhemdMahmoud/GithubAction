@@ -3,7 +3,6 @@ name: Docker Login
 on: 
   push:
     branches: main
-
 jobs:
   login:
     runs-on: ubuntu-latest
