@@ -1,0 +1,21 @@
+name: generate-ascii
+on: push
+
+jobs:
+    Ascijob:
+        runs-on: ubuntu-latest
+        steps:
+
+            - name: Checkout
+              uses: actions/checkout@v6.0.2
+            
+            - name: Upload a Build Artifact
+              uses: actions/upload-artifact@v6.0.0
+              with:
+                name: dragon-text
+                path: dragon.txt
+            - name : run scrpit 
+              run: |
+                chmod +x ./script.sh
+                ./script.sh
+            
