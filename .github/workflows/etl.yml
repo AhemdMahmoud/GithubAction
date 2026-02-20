@@ -48,7 +48,10 @@ jobs:
 
       - name: Install dbt
         run: pip install dbt-postgres
-
+      - name: Load dbt seeds
+        run: |
+          cd dbt_project
+          dbt seed --profiles-dir .
       - name: Run dbt models
         run: |
           cd dbt_project
