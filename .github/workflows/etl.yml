@@ -6,11 +6,27 @@ on:
       - main
   workflow_dispatch:
   schedule:
-    - cron: "0 2 * * *"   # Runs daily at 02:00 UTC
+    - cron: "0 2 * * *"
 
 jobs:
   run-etl:
     runs-on: ubuntu-latest
+
+    # ← Only one services block
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: github_action_user
+          POSTGRES_PASSWORD: password123
+          POSTGRES_DB: my_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U github_action_user"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - name: Checkout repo
@@ -36,9 +52,9 @@ jobs:
       - name: Run dbt models
         run: |
           cd dbt_project
-          dbt run
+          dbt run --profiles-dir .
 
       - name: Test dbt models
         run: |
           cd dbt_project
-          dbt test
+          dbt test --profiles-dir .

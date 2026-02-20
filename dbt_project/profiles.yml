@@ -1,0 +1,11 @@
+my_dbt_profile:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      user: github_action_user
+      password: password123
+      dbname: my_db
+      schema: public
+      port: 5432
