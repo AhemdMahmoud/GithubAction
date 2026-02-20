@@ -12,7 +12,6 @@ jobs:
   run-etl:
     runs-on: ubuntu-latest
 
-    # ← Only one services block
     services:
       postgres:
         image: postgres:15
@@ -61,3 +60,8 @@ jobs:
         run: |
           cd dbt_project
           dbt test --profiles-dir .
+      - name: Upload ETL output
+        uses: actions/upload-artifact@v4
+        with:
+          name: etl-output
+          path: dbt_project/seeds/output_csv.csv
