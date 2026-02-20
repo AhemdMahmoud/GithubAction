@@ -1,4 +1,4 @@
-my_dbt_profile:
+default:           
   target: dev
   outputs:
     dev:
